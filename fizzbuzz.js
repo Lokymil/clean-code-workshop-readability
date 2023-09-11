@@ -1,41 +1,36 @@
-const buzz = v => v % 3 === 0;
+const FIZZ_MULTIPLE = 3;
+const FIZZ = "Fizz";
+const BUZZ_MULTIPLE = 5;
+const BUZZ = "Buzz";
 
-const fizz = v => v % 5 === 0;
+const isMultipleOf = (multiple, number) => number % multiple === 0;
 
-let r = [];
+const getNumberAsFizzBuzz = (numberToParse) => {
+    const isFizz = isMultipleOf(FIZZ_MULTIPLE, numberToParse);
+    const isBuzz = isMultipleOf(BUZZ_MULTIPLE, numberToParse);
 
-const f = (start = true, v = 10) => {
-    if (!start) {
-        if (fizz(v) || buzz(v)) {
-            r = buzz(v) ? fizz(v) ? 'FizzBuzz' : 'Fizz' : 'Buzz';
-        } else {
-            r = v;
-        }
-    } else {
-        for(let i = 1; i <= v; i++) {
-            if (fizz(i) && buzz(i)) {
-                r.push('FizzBuzz');
-            } else if (fizz(i)) {
-                r.push('Buzz');
-            } else if (buzz(i)) {
-                r.push('Fizz');
-            } else {
-                r.push(i);
-            }
-        }
-    }
-};
+    const fizzBuzz = ""
 
-const process = () => {
-    f(true, 15);
-    if (typeof r === "string") {
-        console.log(r);
-    } else {
-        console.log(r.join(', '));
+    if (isFizz) {
+        fizzBuzz += FIZZ_MULTIPLE;
     }
 
-    f(false, 30);
-    console.log(r);
+    if (isBuzz) {
+        fizzBuzz += BUZZ_MULTIPLE;
+    }
+
+    return fizzBuzz || numberToParse;
+}
+
+const getFizzBuzzFrom1To = (maxValue) => {
+    return new Array(maxValue).fill().map((_, index) => {
+        return getNumberAsFizzBuzz(index);
+    })
+}
+
+const main = () => {
+    console.log(getFizzBuzzFrom1To(15).join(', '));
+    console.log(getNumberAsFizzBuzz(30));
 };
 
-process();
+main();
